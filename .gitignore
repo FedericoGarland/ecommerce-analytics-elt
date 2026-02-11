@@ -1,0 +1,26 @@
+﻿# --- Python virtual environment (local only)
+.venv/
+
+# --- dbt generated artifacts (ignore anywhere in the repo)
+**/target/
+**/dbt_packages/
+**/logs/
+
+# --- OS / editor
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Python caches
+__pycache__/
+*.pyc
+
+# --- Safety: if profiles.yml ever ends up in repo by mistake, ignore it
+profiles.yml
+
+
+# raw/local data (do not push)
+data/*.csv
+data/*.zip
+data/*.parquet
+data/*.json

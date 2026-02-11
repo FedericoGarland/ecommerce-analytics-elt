@@ -1,0 +1,270 @@
+# =========================
+# DBT + SNOWFLAKE (WINDOWS / POWERSHELL) - SIMPLE SETUP
+# =========================
+
+# 1) Create project workspace folder (this is where your repo will live)
+# Creates: C:\data\projects\dbt
+mkdir C:\data\projects\dbt
+cd C:\data\projects\dbt
+
+# 2) Create a Python virtual environment INSIDE the workspace
+# Creates: C:\data\projects\dbt\.venv\
+python -m venv .venv
+
+# 3) Activate the virtual environment (so installs go into .venv)
+# Uses:   C:\data\projects\dbt\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
+
+# 4) Upgrade pip inside the venv + install dbt for Snowflake inside the venv
+# Installs packages into: C:\data\projects\dbt\.venv\Lib\site-packages\
+python -m pip install --upgrade pip
+pip install dbt-snowflake
+
+# 5) Verify dbt is available (this dbt executable lives inside .venv)
+dbt --version
+
+# 6) Create a dbt project folder (this is your code repo)
+# Creates: C:\data\projects\dbt\snowflake_dbt_analytics\
+dbt init snowflake_dbt_analytics
+cd snowflake_dbt_analytics
+
+# 7) Create/overwrite dbt profile (credentials) OUTSIDE the repo, in your user home
+# Creates/overwrites: C:\Users\<YOUR_USER>\.dbt\profiles.yml
+notepad $env:USERPROFILE\.dbt\profiles.yml
+# Paste this block into that file (EDIT values):
+# ------------------------------------------------
+# snowflake_dbt_analytics:
+#   target: dev
+#   outputs:
+#     dev:
+#       type: snowflake
+#       account: "LMKUKSQ-HL27281"
+#       user: "FEDERICOGARLAND"
+#       password: "YOUR_SNOWFLAKE_PASSWORD"
+#       role: "ACCOUNTADMIN"
+#       warehouse: "YOUR_WAREHOUSE"
+#       database: "YOUR_DATABASE"
+#       schema: "DEV_DBT"
+#       threads: 4
+#       client_session_keep_alive: false
+# ------------------------------------------------
+
+# 8) Validate connection using the profile above
+dbt debug
+
+# 9) Create a first dbt model file inside the repo
+# Creates file: C:\data\projects\dbt\snowflake_dbt_analytics\models\staging\stg_healthcheck.sql
+mkdir models\staging
+notepad models\staging\stg_healthcheck.sql
+# Put this SQL inside:
+# select 1 as id, current_timestamp() as created_at;
+
+# 10) Run dbt (creates tables/views in Snowflake under schema DEV_DBT)
+dbt run
+
+# 11) Generate + serve dbt docs (lineage/documentation in your browser)
+dbt docs generate
+dbt docs serve
+
+# 12) Initialize git repo (optional but recommended)
+git init
+git add .
+git commit -m "Initialize dbt project with Snowflake"
+
+
+
+
+
+
+
+------ VERSION WITH GIT ----- 10/02/2026
+
+# Ecommerce Analytics ELT (Azure Data Lake + Snowflake + dbt)
+# FULL CLEAN SETUP (Windows / PowerShell)
+#
+# What this script does:
+# 1) Uses your existing project root folder (Documents)
+# 2) Normalizes folder structure: data/, code/, notes/
+# 3) Recreates a local Python venv in the project root: .venv/
+# 4) Installs dbt-snowflake inside the venv
+# 5) Initializes Git at the project root + creates a solid .gitignore
+# 6) Creates a dbt project under: code\dbt\analytics_dbt
+# 7) Opens profiles.yml for Snowflake credentials (outside repo)
+# 8) Runs dbt debug to validate connection
+# ==========================================================
+
+# ----------------------------
+# 0) Create project folder
+# ----------------------------
+mkdir C:\Users\User\Documents\ecommerce-analytics-elt -Force
+cd C:\Users\User\Documents\ecommerce-analytics-elt
+
+# ----------------------------
+# 1) Create folders 
+
+mkdir ".\data" -Force
+mkdir ".\code" -Force
+mkdir ".\notes" -Force
+mkdir ".\code\project_setup" -Force
+mkdir ".\code\dbt" -Force
+mkdir ".\code\ingestion" -Force
+
+# ----------------------------
+# 2) Create envelope (delete any old venv + recreate)
+# Creates: C:\Users\User\Documents\ecommerce-analytics-elt\.venv\
+# ----------------------------
+Remove-Item -Recurse -Force ".\.venv" -ErrorAction SilentlyContinue
+python -m venv .venv
+
+# Activate venv (after this, pip installs go into .venv)
+.\.venv\Scripts\Activate.ps1
+
+# Upgrade pip inside the venv (avoids dependency issues)
+python -m pip install --upgrade pip
+
+# Install dbt adapter for Snowflake (dbt core comes with it)
+pip install dbt-snowflake
+
+# Verify dbt is runnable and which versions you have
+dbt --version
+
+# ----------------------------
+# 3) Initialize Git at the project root (best practice for a full portfolio project)
+# Repo will include: data/, notes/, code/, README.md
+# ----------------------------
+git init
+
+# Create/overwrite a solid .gitignore at ROOT (important!)
+# - .venv is local
+# - dbt artifacts (target/logs/dbt_packages) are generated
+# - editor/OS junk ignored
+@"
+# --- Python virtual environment (local only)
+.venv/
+
+# --- dbt generated artifacts (ignore anywhere in the repo)
+**/target/
+**/dbt_packages/
+**/logs/
+
+# --- OS / editor
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Python caches
+__pycache__/
+*.pyc
+
+# --- Safety: if profiles.yml ever ends up in repo by mistake, ignore it
+profiles.yml
+"@ | Set-Content -Path ".\.gitignore" -Encoding UTF8
+
+# Create a minimal README if it doesn't exist
+if (!(Test-Path ".\README.md")) {
+@"
+# Ecommerce Analytics – Warehousing & ELT (Azure Data Lake + Snowflake + dbt)
+
+Portfolio end-to-end ELT project:
+- Landing: Azure Data Lake Storage (ADLS)
+- Warehouse: Snowflake
+- Transformations: dbt (staging → marts)
+"@ | Set-Content -Path ".\README.md" -Encoding UTF8
+}
+
+# Setting username 
+git config --global user.name "Federico Garland"
+git config --global user.email "federicogarlands@gmail.com" 
+
+# Adding and commiting changes (to local repository)
+git add .
+git commit -m "Initialize project structure (repo root, venv, ignore rules)"
+
+# Pushing to GitHub 
+git branch -M main
+git remote add origin https://github.com/FedericoGarland/ecommerce-analytics-elt
+git push -u origin main
+
+
+# ----------------------------
+# 4) Create dbt project inside code\dbt\
+# Creates folder: ...\ecommerce-analytics-elt\code\dbt\analytics_dbt\
+# ----------------------------
+cd ".\code\dbt"
+
+# Start clean: delete existing dbt project folder if it exists
+Remove-Item -Recurse -Force ".\analytics_dbt" -ErrorAction SilentlyContinue
+
+dbt init analytics_dbt
+cd ".\analytics_dbt"
+
+# Commit dbt scaffold to the ROOT git repo
+cd "..\..\.."   # back to project root
+git add .
+git commit -m "Add dbt project scaffold under code/dbt/analytics_dbt"
+
+# ----------------------------
+# 5) Configure Snowflake connection (profiles.yml OUTSIDE repo)
+# dbt reads from: C:\Users\User\.dbt\profiles.yml
+# ----------------------------
+cd ".\code\dbt\analytics_dbt"
+
+# Show where dbt expects the config directory:
+dbt debug --config-dir
+
+# Open profiles.yml to edit manually (recommended so you SEE what's happening)
+notepad $env:USERPROFILE\.dbt\profiles.yml
+
+# ----------------------------
+# 6) Validate connection (after you save profiles.yml)
+# ----------------------------
+dbt debug
+
+# ----------------------------
+# 7) Optional: create a first healthcheck model
+# ----------------------------
+mkdir ".\models\staging" -Force
+@"
+select
+  1 as id,
+  current_timestamp() as created_at
+"@ | Set-Content -Path ".\models\staging\stg_healthcheck.sql" -Encoding UTF8
+
+dbt run
+
+# Commit healthcheck model
+cd "..\..\.."
+git add .
+git commit -m "Add first staging model (healthcheck) and validate dbt run"
+
+
+
+
+
+
+# APUNTES ------------------------------------------------- 
+# Estructura PowerShell: comando accion -opcion valor
+# valor = argumento
+# la diferencia entre un guion y dos guiones es solo que uno es version corta y otra version larga
+# Los guiones (que son opciones, es decir modificadores para comandos) pueden significar cosas distintas en distintos programas (dbt, git, python) aunque ejecutes todo dentro de PowerShell
+# En " python -m pip" es Python quien interpreta el -m, no PowerShell 
+# Los guiones sirven para modificar el comportamiento, activar/desactivar cosas y pasar parámetros. 
+# dbt run --full-refresh solo activa un modo y no lleva valor. 
+# git commit -m "message" si es una opcion que requiere valor. 
+# python -m pip modifica el comportamiento haciendo que Python ejecute lo siguiente como programa 
+# el significado de las opciones depende del comando que las precede. Por ejemplo, en git commit -m, el -m significa message. Mientras tanto, en git branch -m, el -m significa rename. 
+
+
+
+# EJEMPLO DE ACCIONES 
+git commit
+dbt run
+pip install
+python script.py
+
+# EJEMPLO DE ACCIONES CON OPCIONES (MODIFICADORES)
+git commit -m
+dbt run --select
+pip install --upgrade
+python -m
+
