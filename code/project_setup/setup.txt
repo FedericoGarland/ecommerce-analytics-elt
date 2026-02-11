@@ -192,16 +192,13 @@ git push -u origin main
 # ----------------------------
 cd ".\code\dbt"
 
-# Start clean: delete existing dbt project folder if it exists
-Remove-Item -Recurse -Force ".\analytics_dbt" -ErrorAction SilentlyContinue
-
-dbt init analytics_dbt
-cd ".\analytics_dbt"
+dbt init ecommerce_dbt
+cd ".\ecommerce_dbt"
 
 # Commit dbt scaffold to the ROOT git repo
 cd "..\..\.."   # back to project root
 git add .
-git commit -m "Add dbt project scaffold under code/dbt/analytics_dbt"
+git commit -m "Add dbt project scaffold under code/dbt/ecommerce_dbt"
 
 # ----------------------------
 # 5) Configure Snowflake connection (profiles.yml OUTSIDE repo)
