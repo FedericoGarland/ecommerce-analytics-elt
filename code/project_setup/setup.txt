@@ -199,17 +199,18 @@ cd ".\ecommerce_dbt"
 cd "..\..\.."   # back to project root
 git add .
 git commit -m "Add dbt project scaffold under code/dbt/ecommerce_dbt"
+git push
 
 # ----------------------------
 # 5) Configure Snowflake connection (profiles.yml OUTSIDE repo)
 # dbt reads from: C:\Users\User\.dbt\profiles.yml
 # ----------------------------
-cd ".\code\dbt\analytics_dbt"
+cd ".\code\dbt\ecommerce_dbt"
 
 # Show where dbt expects the config directory:
 dbt debug --config-dir
 
-# Open profiles.yml to edit manually (recommended so you SEE what's happening)
+# Open profiles.yml to edit manually 
 notepad $env:USERPROFILE\.dbt\profiles.yml
 
 # ----------------------------
