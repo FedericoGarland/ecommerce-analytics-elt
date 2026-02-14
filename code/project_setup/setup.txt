@@ -1,82 +1,3 @@
-# =========================
-# DBT + SNOWFLAKE (WINDOWS / POWERSHELL) - SIMPLE SETUP
-# =========================
-
-# 1) Create project workspace folder (this is where your repo will live)
-# Creates: C:\data\projects\dbt
-mkdir C:\data\projects\dbt
-cd C:\data\projects\dbt
-
-# 2) Create a Python virtual environment INSIDE the workspace
-# Creates: C:\data\projects\dbt\.venv\
-python -m venv .venv
-
-# 3) Activate the virtual environment (so installs go into .venv)
-# Uses:   C:\data\projects\dbt\.venv\Scripts\Activate.ps1
-.\.venv\Scripts\Activate.ps1
-
-# 4) Upgrade pip inside the venv + install dbt for Snowflake inside the venv
-# Installs packages into: C:\data\projects\dbt\.venv\Lib\site-packages\
-python -m pip install --upgrade pip
-pip install dbt-snowflake
-
-# 5) Verify dbt is available (this dbt executable lives inside .venv)
-dbt --version
-
-# 6) Create a dbt project folder (this is your code repo)
-# Creates: C:\data\projects\dbt\snowflake_dbt_analytics\
-dbt init snowflake_dbt_analytics
-cd snowflake_dbt_analytics
-
-# 7) Create/overwrite dbt profile (credentials) OUTSIDE the repo, in your user home
-# Creates/overwrites: C:\Users\<YOUR_USER>\.dbt\profiles.yml
-notepad $env:USERPROFILE\.dbt\profiles.yml
-# Paste this block into that file (EDIT values):
-# ------------------------------------------------
-# snowflake_dbt_analytics:
-#   target: dev
-#   outputs:
-#     dev:
-#       type: snowflake
-#       account: "LMKUKSQ-HL27281"
-#       user: "FEDERICOGARLAND"
-#       password: "YOUR_SNOWFLAKE_PASSWORD"
-#       role: "ACCOUNTADMIN"
-#       warehouse: "YOUR_WAREHOUSE"
-#       database: "YOUR_DATABASE"
-#       schema: "DEV_DBT"
-#       threads: 4
-#       client_session_keep_alive: false
-# ------------------------------------------------
-
-# 8) Validate connection using the profile above
-dbt debug
-
-# 9) Create a first dbt model file inside the repo
-# Creates file: C:\data\projects\dbt\snowflake_dbt_analytics\models\staging\stg_healthcheck.sql
-mkdir models\staging
-notepad models\staging\stg_healthcheck.sql
-# Put this SQL inside:
-# select 1 as id, current_timestamp() as created_at;
-
-# 10) Run dbt (creates tables/views in Snowflake under schema DEV_DBT)
-dbt run
-
-# 11) Generate + serve dbt docs (lineage/documentation in your browser)
-dbt docs generate
-dbt docs serve
-
-# 12) Initialize git repo (optional but recommended)
-git init
-git add .
-git commit -m "Initialize dbt project with Snowflake"
-
-
-
-
-
-
-
 ------ VERSION WITH GIT ----- 10/02/2026
 
 # Ecommerce Analytics ELT (Azure Data Lake + Snowflake + dbt)
@@ -218,22 +139,14 @@ notepad $env:USERPROFILE\.dbt\profiles.yml
 # ----------------------------
 dbt debug
 
-# ----------------------------
-# 7) Optional: create a first healthcheck model
-# ----------------------------
-mkdir ".\models\staging" -Force
-@"
-select
-  1 as id,
-  current_timestamp() as created_at
-"@ | Set-Content -Path ".\models\staging\stg_healthcheck.sql" -Encoding UTF8
 
+# Run dbt to create default models 
 dbt run
 
-# Commit healthcheck model
+# Commit 
 cd "..\..\.."
 git add .
-git commit -m "Add first staging model (healthcheck) and validate dbt run"
+git commit -m "dbt connected to Snowflake and first models created"
 
 
 
