@@ -1,0 +1,4 @@
+CREATE OR REPLACE STAGE ECOMMERCE.RAW.AZURE_RAW_STAGE
+  URL = 'azure://datalakefgarland.blob.core.windows.net/raw-organized'
+  CREDENTIALS = (AZURE_SAS_TOKEN = '<PASTE_SAS_TOKEN_HERE>')
+  FILE_FORMAT = ECOMMERCE.RAW.CSV_FORMAT;
