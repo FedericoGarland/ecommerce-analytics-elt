@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: dim_customer
+    columns:
+      - name: customer_id
+        tests: [not_null, unique]
+
+  - name: fct_sales
+    columns:
+      - name: order_id
+        tests: [not_null]
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_id
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('stg_products')   # o dim_products cuando la crees
+              field: product_id
+      - name: seller_id
+        tests:
+          - relationships:
+              to: ref('stg_sellers')    # o dim_sellers cuando la crees
+              field: seller_id
