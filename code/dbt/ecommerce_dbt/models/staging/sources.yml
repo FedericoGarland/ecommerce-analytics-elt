@@ -12,5 +12,5 @@ sources:
       - name: OLIST_ORDER_REVIEWS
       - name: OLIST_PRODUCTS
       - name: OLIST_SELLERS
-      - name: PRODUCT_CATEGORY_TRANSLATION
+      - name: PRODUCT_CATEGORY_NAME_TRANSLATION
       - name: OLIST_GEOLOCATION
