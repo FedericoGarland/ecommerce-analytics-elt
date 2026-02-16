@@ -18,3 +18,4 @@ oi.freight_value,
 o.order_status
 from order_items oi INNER JOIN orders o
 ON oi.order_id = o.order_id
+WHERE o.order_status NOT IN ('canceled', 'unavailable')
