@@ -1,9 +1,19 @@
 version: 2
 
 models:
-  - name: dim_customer
+  - name: dim_customers
     columns:
       - name: customer_id
+        tests: [not_null, unique] # Not null and unique tests on the primary keys of the dimension tables 
+
+  - name: dim_sellers 
+    columns: 
+      - name: seller_id
+        tests: [not_null, unique]
+
+  - name: dim_products
+    columns: 
+      - name: product_id
         tests: [not_null, unique]
 
   - name: fct_sales
@@ -12,16 +22,51 @@ models:
         tests: [not_null]
       - name: customer_id
         tests:
-          - relationships:
-              to: ref('dim_customer')
-              field: customer_id
+          - relationships:  # Relationship tests on the foreign keys of the fact tables to ensure referential integrity
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
       - name: product_id
         tests:
           - relationships:
-              to: ref('stg_products')   # o dim_products cuando la crees
-              field: product_id
+              arguments:
+                to: ref('dim_products')  
+                field: product_id
       - name: seller_id
         tests:
           - relationships:
-              to: ref('stg_sellers')    # o dim_sellers cuando la crees
-              field: seller_id
+              arguments:
+                to: ref('dim_sellers')
+                field: seller_id
+
+  - name: fct_reviews 
+    columns: 
+      - name: customer_id 
+        tests: 
+          - relationships: 
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id 
+      - name: product_id 
+        tests: 
+          - relationships: 
+              arguments:
+                 to: ref('dim_products')
+                 field: product_id
+      - name: seller_id
+        tests: 
+          - relationships: 
+              arguments:
+                to: ref('dim_sellers')
+                field: seller_id
+
+  - name: fct_payments 
+    columns: 
+      - name: customer_id 
+        tests: 
+          - relationships: 
+              arguments:
+                to: ref('dim_customers')
+                field: customer_id
+        
+

@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: bi_top_products
+    columns:
+      - name: product_category_name
+        tests: [unique]
