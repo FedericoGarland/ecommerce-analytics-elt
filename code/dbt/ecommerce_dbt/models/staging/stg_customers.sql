@@ -5,7 +5,7 @@ with source as (
 
 ),
 
-renamed as (
+stg_table as (
 
     select
         customer_id,
@@ -17,4 +17,4 @@ renamed as (
 
 )
 
-select * from renamed
+select * from stg_table

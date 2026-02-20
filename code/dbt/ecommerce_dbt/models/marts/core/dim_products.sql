@@ -3,7 +3,7 @@ with products as (
 ), 
 
 translation as (
-    select * from {{ ref('stg_product_category_translation')}}
+    select * from {{ ref('stg_product_category_translation') }}
 )
 
 select 
