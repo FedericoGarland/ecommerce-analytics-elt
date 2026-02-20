@@ -38,6 +38,8 @@ models:
               arguments:
                 to: ref('dim_sellers')
                 field: seller_id
+      - name: price 
+        tests: [column_positive_test]
 
   - name: fct_reviews 
     columns: 
