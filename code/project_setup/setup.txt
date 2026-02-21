@@ -32,6 +32,8 @@ mkdir ".\code\snowflake" -Force
 mkdir ".\code\snowflake\setup" -Force
 mkdir ".\code\snowflake\ingestion" -Force
 mkdir ".\code\snowflake\admin" -Force
+mkdir ".\code\orchestration" -Force
+mkdir ".\code\orchestration\prefect" -Force
 
 
 # ----------------------------
@@ -52,6 +54,9 @@ pip install dbt-snowflake
 
 # Verify dbt is runnable and which versions you have
 dbt --version
+
+# Install prefect for orchestration
+pip install prefect snowflake-connector-python python-dotenv
 
 # ----------------------------
 # 3) Initialize Git at the project root (best practice for a full portfolio project)
