@@ -1,0 +1,3 @@
+Once the dbt project is completed, the CLI is used to execute: 
+dbt run 
+dbt test 

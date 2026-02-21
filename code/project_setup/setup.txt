@@ -28,7 +28,11 @@ mkdir ".\code" -Force
 mkdir ".\notes" -Force
 mkdir ".\code\project_setup" -Force
 mkdir ".\code\dbt" -Force
-mkdir ".\code\ingestion" -Force
+mkdir ".\code\snowflake" -Force
+mkdir ".\code\snowflake\setup" -Force
+mkdir ".\code\snowflake\ingestion" -Force
+mkdir ".\code\snowflake\admin" -Force
+
 
 # ----------------------------
 # 2) Create envelope (delete any old venv + recreate)
@@ -109,7 +113,7 @@ git push -u origin main
 
 # ----------------------------
 # 4) Create dbt project inside code\dbt\
-# Creates folder: ...\ecommerce-analytics-elt\code\dbt\analytics_dbt\
+# Creates folder: ...\ecommerce-analytics-elt\code\dbt\ecommerce_dbt\
 # ----------------------------
 cd ".\code\dbt"
 
@@ -164,7 +168,7 @@ git commit -m "dbt connected to Snowflake and first models created"
 # git commit -m "message" si es una opcion que requiere valor. 
 # python -m pip modifica el comportamiento haciendo que Python ejecute lo siguiente como programa 
 # el significado de las opciones depende del comando que las precede. Por ejemplo, en git commit -m, el -m significa message. Mientras tanto, en git branch -m, el -m significa rename. 
-
+# Para regresar al entorno/repo/workspace cada vez que abrimos PowerShell solo debemos seleccionar el directorio y activar el Python envelope de nuevo, asi: cd C:\Users\User\Documents\ecommerce-analytics-elt y luego .\.venv\Scripts\Activate.ps1
 
 
 # EJEMPLO DE ACCIONES 
