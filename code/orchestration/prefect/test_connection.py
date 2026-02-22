@@ -2,10 +2,10 @@ import os
 from dotenv import load_dotenv
 import snowflake.connector
 
-# Cargar variables del .env
+# Load variables from .env
 load_dotenv()
 
-# Conectarse
+# Connect with Snowflake
 conn = snowflake.connector.connect(
     account=os.getenv("SNOWFLAKE_ACCOUNT"),
     user=os.getenv("SNOWFLAKE_USER"),
@@ -18,7 +18,6 @@ conn = snowflake.connector.connect(
 cur = conn.cursor()
 cur.execute("SELECT CURRENT_ROLE(), CURRENT_WAREHOUSE(), CURRENT_DATABASE()")
 
-print("Conexion OK:")
 print(cur.fetchone())
 
 cur.close()
