@@ -34,6 +34,7 @@ mkdir ".\code\snowflake\ingestion" -Force
 mkdir ".\code\snowflake\admin" -Force
 mkdir ".\code\orchestration" -Force
 mkdir ".\code\orchestration\prefect" -Force
+ni .env
 
 
 # ----------------------------
@@ -188,3 +189,6 @@ dbt run --select
 pip install --upgrade
 python -m
 
+
+
+# venv es el entorno Python y env es almacen de credenciales, son carpetas y cosas distintas.
