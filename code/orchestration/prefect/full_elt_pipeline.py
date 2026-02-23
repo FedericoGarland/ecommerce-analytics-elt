@@ -43,7 +43,7 @@ def full_refresh_raw():
         ("ECOMMERCE.RAW.OLIST_PRODUCTS", "products", "olist_products_dataset.csv"),
         ("ECOMMERCE.RAW.OLIST_SELLERS", "sellers", "olist_sellers_dataset.csv"),
         ("ECOMMERCE.RAW.OLIST_GEOLOCATION", "geolocation", "olist_geolocation_dataset.csv"),
-        ("ECOMMERCE.RAW.PRODUCT_CATEGORY_NAME_TRANSLATION", "product_category_name_translation", "product_category_translation.csv"),
+        ("ECOMMERCE.RAW.PRODUCT_CATEGORY_NAME_TRANSLATION", "product_category_translation", "product_category_name_translation.csv"),
     ]
 
     conn = get_conn()
