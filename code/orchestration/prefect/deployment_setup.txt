@@ -1,0 +1,47 @@
+prefect init 
+
+prefect config view
+
+
+#1.  Create server (window 1, stays running, is the brain)
+prefect server start # Copy the API: PREFECT_API_URL=http://127.0.0.1:4200/api
+
+
+#2. Create worker (window 2, stays running, is the mover)
+# Set server
+prefect config set PREFECT_API_URL=http://127.0.0.1:4200/api
+
+# Create workpool 
+prefect work-pool create "local-pool" -t process
+
+# Create worker 
+prefect worker start --pool local-pool
+
+
+
+
+
+
+
+
+#3. Create deployment (window 3)
+prefect deploy .\code\orchestration\prefect\full_elt_pipeline.py:full_elt_pipeline # You select the Python file where you wrote your flow and corresponding tasks
+-n "daily-full-elt" 
+-p "default" 
+-q "default"
+--cron "0 6 * * *"     # Scheduled everyday at 6 am
+-- timezone "America/Lima"
+
+# With this the deployment is complete, as long as the server and worker are running this deployment will execute at the scheduled time. 
+
+
+#4. Test deployment (if you want to test before scheduled time)
+prefect deployment run 'full_elt_pipeline/daily-full-elt'
+
+
+
+# Basically you first create tasks, then add them up into a flow. 
+# You create a server in one terminal.
+# Using another terminal, you set the server that is running and in it you create a work pool.
+# Within this work pool, you start a worker. 
+# Then in another terminal (while server and worker run) you deploy the flow and give this deployment a name. 

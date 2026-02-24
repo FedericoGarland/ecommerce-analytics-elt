@@ -54,7 +54,7 @@ def full_refresh_raw():
 
         # 1) TRUNCATE
         cur.execute(f"TRUNCATE TABLE {raw_table};")
-        print("✅ TRUNCATE OK")
+        print("TRUNCATE OK")
 
         # 2) COPY (archivo exacto)
         copy_sql = f"""
@@ -67,7 +67,7 @@ def full_refresh_raw():
         cur.execute(copy_sql)
 
         res = cur.fetchall()
-        print("✅ COPY INTO result:")
+        print("COPY INTO result:")
         for r in res:
             print(r)
 

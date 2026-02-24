@@ -24,3 +24,6 @@ data/*.csv
 data/*.zip
 data/*.parquet
 data/*.json
+
+# Snowflake credentials for orchestration 
+.env
