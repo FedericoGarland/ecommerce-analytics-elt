@@ -20,6 +20,8 @@ models:
     columns:
       - name: order_id
         tests: [not_null]
+      - name: order_item_key
+        tests: [not_null, unique]
       - name: customer_id
         tests:
           - relationships:  # Relationship tests on the foreign keys of the fact tables to ensure referential integrity
