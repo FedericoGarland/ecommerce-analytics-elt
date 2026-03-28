@@ -2,6 +2,7 @@ version: 2
 
 models:
   - name: dim_customers
+    description: "Dimension table for customers"
     columns:
       - name: customer_id
         tests: [not_null, unique] # Not null and unique tests on the primary keys of the dimension tables 
@@ -17,6 +18,7 @@ models:
         tests: [not_null, unique]
 
   - name: fct_sales
+    description: "Main sales table at order-item granularity"
     columns:
       - name: order_id
         tests: [not_null]
