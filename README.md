@@ -1,7 +1,7 @@
 ﻿## End-to-End Analytics Engineering Pipeline and Data Warehouse for E-Commerce (Snowflake, dbt, Prefect, Azure Data Lake)
 
 ## Overview
-This project consisted in the design, development and deployment of a cloud data warehouse, semantic model and ELT pipeline for e-commerce sales analytics. An end-to-end analytics engineering ELT pipeline was built to extract raw data from Azure Data Lake to a Snowflake data warehouse, transform and model the raw data into a star-schema semantic layer (marts) using dbt and incremental logic, run automated tests for data quality and referential integrity, generate documentation, and feed a Power BI executive sales dashboard for real-world decision making. The pipeline is fully automated and orchestrated with Prefect (Python) to run daily at a scheduled time, allowing the business access to relevant and updated information. The project was version controlled from start to end using Git, including feature branching and pull request merging with main.
+This project consisted in the design, development and deployment of a cloud data warehouse, semantic model and ELT pipeline for e-commerce sales analytics. An end-to-end analytics engineering ELT pipeline was built to extract raw data from Azure Data Lake to a Snowflake data warehouse, transform and model the raw data into a star-schema semantic layer (marts) using dbt and incremental logic, run automated tests to ensure data quality, generate documentation, and feed a Power BI executive sales dashboard for real-world decision making. The pipeline is fully automated and orchestrated with Prefect (Python) to run daily at a scheduled time, allowing the business constant access to relevant and updated information. The project was version controlled from start to end using Git. 
 
 ---
 
@@ -119,11 +119,6 @@ Reduces manual reporting effort and enables faster decision-making.
 
 ---
 
-## Screenshots
-(Add dbt docs + model + dashboard here)
-
----
-
 ## Key Techniques
 - Designing scalable ELT pipelines using dbt  
 - Implementing incremental models in Snowflake  
@@ -133,37 +128,14 @@ Reduces manual reporting effort and enables faster decision-making.
 
 ---
 
+## Screenshots
+
+
+---
+
 ## Links
 - GitHub Repo  
 - Portfolio Website  
 - LinkedIn  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-OVERVIEW 
-BUSINESS PROBLEM 
-SOLUTION 
-TECH STACK 
-ARCHITECTURE 
-DATA MODEL / WORKFLOW 
-KEY FEATURES 
-RESULTS / BUSINESS VALUE 
-SCREENSHOTS 
-REPOSITORY STRUCTURE 
-HOW TO RUN 
-KEY LEARNINGS 
-CONTACT 
