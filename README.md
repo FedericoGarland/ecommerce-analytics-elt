@@ -1,7 +1,27 @@
 ﻿## End-to-End Analytics Engineering Pipeline and Data Warehouse for E-Commerce (Snowflake, dbt, Prefect, Azure Data Lake)
 
 ## Overview
+End-to-end production pipeline and cloud data warehouse for e-commerce analytics
 This project consisted in the design, development and deployment of a cloud data warehouse, semantic model and ELT pipeline for e-commerce sales analytics. An end-to-end analytics engineering ELT pipeline was built to extract raw data from Azure Data Lake to a Snowflake data warehouse, transform and model the raw data into a star-schema semantic layer (marts) using dbt and incremental logic, run automated tests to ensure data quality, generate documentation, and feed a Power BI executive sales dashboard for real-world decision making. The pipeline is fully automated and orchestrated with Prefect (Python) to run daily at a scheduled time, allowing the business constant access to relevant and updated information. The project was version controlled from start to end using Git. 
+
+
+## Overview
+
+Production-ready end-to-end analytics engineering pipeline and cloud data warehouse for e-commerce analytics.
+
+Designed and built an ELT pipeline that ingests raw data from Azure Data Lake into Snowflake, transforms it into a star-schema semantic model (marts) using dbt, and delivers business-ready insights through a Power BI executive dashboard.
+
+The pipeline is fully automated and orchestrated with Prefect (Python), running on a daily schedule to ensure consistent access to reliable and up-to-date data.
+
+Key components include:
+- Data ingestion and loading into Snowflake (data warehouse) from Azure Data Lake
+- Transformation using dbt (staging + marts) with incremental logic 
+- Automated testing for data quality and referential integrity (dbt tests)
+- Semantic layer design (star schema, dimensional modeling)
+- End-user analytics via Power BI dashboard
+- Orchestration (Prefect)
+- End-to-end version control using Git
+- Metrics for real-world decision making
 
 ---
 
@@ -51,22 +71,6 @@ Orchestration: Prefect
 
 ---
 
-## Data model
-The data model is structured as a star schema with fact and dimension tables, serving as the semantic layer for business analytics. It is prioritized that the architecture allows for scalability, accuracy, performance, user understanding and business value. 
-
-Fact Tables 
-Fact Sales
-Fact Reviews 
-
-Dimension Tables 
-Dim Customer
-Dim Product 
-Dim Seller
-
-This structure enables scalability, efficient querying and consistent business definitions.
-
----
-
 ## Pipeline Flow
 1. Raw data stored in Azure Data Lake  
 2. Loaded into Snowflake (raw layer)  
@@ -96,6 +100,20 @@ This diagram shows the transformation flow from raw to staging to marts.
 
 ---
 
+## Semantic Layer (Data Model)
+The data model is structured as a star schema with fact and dimension tables, serving as the semantic layer for business analytics. It is prioritized that the architecture allows for scalability, accuracy, performance, user understanding and business value. 
+
+Fact Tables 
+Fact Sales
+Fact Reviews 
+
+Dimension Tables 
+Dim Customer
+Dim Product 
+Dim Seller
+
+This structure enables scalability, efficient querying and consistent business definitions.
+
 ## Warehouse Management 
 Specific roles and Snowflake warehouses were created for each process: 
 
@@ -106,6 +124,9 @@ Specific roles and Snowflake warehouses were created for each process:
 Costing was managed by using adequate warehouse sizes and clusters. Multiple clusters were used in the ANALYTICS_WH to manage potential concurrency from daily analytics workflows (e.g. refreshes of multiple dashboards).
 
 --- 
+
+## Dashboard 
+A sales dashboard displaying key metrics and trends was developed consuming the semantic layer from Snowflake.
 
 ## Business Value
 This pipeline enables:
