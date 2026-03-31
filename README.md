@@ -20,14 +20,16 @@ Key components include:
 
 ## Architecture
 
+### Pipeline
 ![Architecture](images/architecture.png)
+Azure Data Lake → Snowflake → dbt → Semantic Layer → Power BI  
+Orchestration: Prefect
 
+### Semantic Layer (Data Warehouse)
 ![Semantic Model (Data Warehouse)](images/model.jpg)
 
+### Executive Dashboard
 ![Dashboard](images/dashboard.png)
-
-Azure Data Lake (Landing) -> Snowflake (Data Warehouse) -> dbt transformation (Raw -> Staging -> Marts) -> Semantic Layer -> Power BI Dashboard
-Orchestration: Prefect
 
 ---
 
@@ -84,9 +86,16 @@ An end-to-end ELT pipeline was built to:
 
 ## dbt Lineage
 
-This diagram shows the transformation flow from raw to staging to marts.
+This diagram (DAG) shows the transformation flow from raw to staging to marts.
 
 ![dbt DAG](images/dbt_dag.png)
+
+
+Incremental logic was used on the fact sales table to ensure scalable processing and cost reduction. 
+
+![dbt docs for fact sales](images/dbt_docs1.png)
+![dbt docs for fact sales 2](images/dbt_docs2.png)
+
 ---
 
 ## Data Quality
@@ -98,6 +107,8 @@ This diagram shows the transformation flow from raw to staging to marts.
   - Referential integrity
   - Clean and reliable datasets
   - Trustworthy reporting layer
+
+![dbt tests for fact_sales](images/dbt_tests.png)
 
 ---
 
@@ -116,7 +127,7 @@ The data model is structured as a star schema with fact and dimension tables, se
 
 This structure enables scalability, efficient querying and consistent business definitions.
 
-![Semantic Model (Data Warehouse)](images/model.png)
+![Semantic Model (Data Warehouse)](images/model.jpg)
 
 ## Warehouse Management 
 Specific roles and Snowflake warehouses were created for each process: 
@@ -131,6 +142,8 @@ Costing was managed by using adequate warehouse sizes and clusters. Multiple clu
 
 ## Dashboard 
 A Power BI sales dashboard was developed to visualize key business metrics, trends and performance indicators, enabling interactive analysis at customer, product and time levels. The data for the dashboard is consumed directly from the semantic layer in Snowflake.
+
+![Dashboard](images/dashboard.png)
 
 ## Business Value
 This pipeline enables:
@@ -150,11 +163,6 @@ Reduces manual reporting effort and enables faster decision-making.
 - Structuring star schema for analytics  
 - Orchestrating pipelines with Prefect  
 - Managing version control with Git workflows  
-
----
-
-## Screenshots
-
 
 ---
 
