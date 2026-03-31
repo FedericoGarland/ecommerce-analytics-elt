@@ -22,6 +22,10 @@ Key components include:
 
 ![Architecture](images/architecture.png)
 
+![Semantic Model (Data Warehouse)](images/model.png)
+
+![Dashboard](images/dashboard.png)
+
 Azure Data Lake (Landing) -> Snowflake (Data Warehouse) -> dbt transformation (Raw -> Staging -> Marts) -> Semantic Layer -> Power BI Dashboard
 Orchestration: Prefect
 
@@ -48,7 +52,7 @@ E-commerce businesses generate large volumes of raw transactional data, but ofte
 - Automated pipelines for daily reporting
 - Scalable architecture for analytics
 
-This hinders the ability of the business to access key information for daily decision-making, operational problem solving and commercial strategy planning. 
+This hinders the ability of the business to access key information for daily decision-making, operational problem solving and commercial strategy.
 
 
 ---
@@ -100,16 +104,19 @@ This diagram shows the transformation flow from raw to staging to marts.
 ## Semantic Layer (Data Model)
 The data model is structured as a star schema with fact and dimension tables, serving as the semantic layer for business analytics. It is prioritized that the architecture allows for scalability, accuracy, performance, user understanding and business value. 
 
-Fact Tables 
-Fact Sales
-Fact Reviews 
+**Fact Tables**
+- Fact_Sales
+- Fact_Reviews
+- Fact_Payments
 
-Dimension Tables 
-Dim Customer
-Dim Product 
-Dim Seller
+**Dimension Tables**
+- Dim_Customers
+- Dim_Products
+- Dim_Sellers 
 
 This structure enables scalability, efficient querying and consistent business definitions.
+
+![Semantic Model (Data Warehouse)](images/model.png)
 
 ## Warehouse Management 
 Specific roles and Snowflake warehouses were created for each process: 
@@ -123,7 +130,7 @@ Costing was managed by using adequate warehouse sizes and clusters. Multiple clu
 --- 
 
 ## Dashboard 
-A sales dashboard displaying key metrics and trends was developed consuming the semantic layer from Snowflake.
+A Power BI sales dashboard was developed to visualize key business metrics, trends and performance indicators, enabling interactive analysis at customer, product and time levels. The data for the dashboard is consumed directly from the semantic layer in Snowflake.
 
 ## Business Value
 This pipeline enables:
@@ -151,8 +158,7 @@ Reduces manual reporting effort and enables faster decision-making.
 
 ---
 
-## Links
-- GitHub Repo  
-- Portfolio Website  
-- LinkedIn  
-
+## 🔗 Links
+- 🚀 [Project Repository](https://github.com/FedericoGarland/ecommerce-analytics-elt)
+- 🌐 [Portfolio Website](https://federicogarland.github.io/FedericoGarlandWebsite/)
+- 💼 [LinkedIn Profile](https://www.linkedin.com/in/federico-garland/)
