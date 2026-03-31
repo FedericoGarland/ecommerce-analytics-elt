@@ -20,10 +20,9 @@ Key components include:
 
 ## Architecture
 
-### ELT Pipeline (Extract, Transform, Load)
+### ELT Pipeline (Extract, Load, Transform)
 ![Architecture](images/architecture.png)
-Azure Data Lake → Snowflake → dbt → Semantic Layer → Power BI  
-Orchestration: Prefect
+Azure Data Lake → Snowflake → dbt → Semantic Layer → Power BI | Orchestration: Prefect
 
 ### Semantic Layer (Data Warehouse)
 ![Semantic Model (Data Warehouse)](images/model.jpg)
@@ -90,9 +89,10 @@ This diagram (DAG) shows the transformation flow from raw to staging to marts.
 
 ![dbt DAG](images/dbt_dag.png)
 
+## Incremental modeling 
+Incremental logic was implemented in the `fact_sales` model to process only new data, improving performance, scalability and reducing compute costs.
 
-Incremental logic was used on the fact sales table to ensure scalable processing and cost reduction. 
-
+Below is an example of the dbt model configuration and documentation:
 ![dbt docs for fact sales](images/dbt_docs1.png)
 ![dbt docs for fact sales 2](images/dbt_docs2.png)
 
