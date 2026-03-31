@@ -3,7 +3,7 @@
 ## Overview
 Production-ready ELT pipeline and cloud data warehouse for e-commerce analytics. Processes and models e-commerce transactional data to enable scalable, automated analytics and decision-making.
 
-Designed and built an end-to-end ELT pipeline that ingests raw data from Azure Data Lake into Snowflake, transforms it into a star-schema semantic model (marts) using dbt, and delivers business-ready insights through a Power BI executive dashboard.
+An end-to-end ELT pipeline was designed and built to ingest raw data from Azure Data Lake into Snowflake, transform it into a star-schema semantic model (marts) using dbt, and deliver business-ready insights through a Power BI executive dashboard.
 
 The pipeline is fully automated and orchestrated with Prefect (Python), running on a daily schedule to ensure consistent access to reliable and up-to-date data.
 
