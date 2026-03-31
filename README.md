@@ -22,7 +22,7 @@ Key components include:
 
 ![Architecture](images/architecture.png)
 
-![Semantic Model (Data Warehouse)](images/model.png)
+![Semantic Model (Data Warehouse)](images/model.jpg)
 
 ![Dashboard](images/dashboard.png)
 
