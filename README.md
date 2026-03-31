@@ -27,6 +27,19 @@ Orchestration: Prefect
 
 ---
 
+## Tech Stack 
+- Azure Data Lake 
+- Azure Data Factory
+- Snowflake 
+- dbt 
+- SQL
+- Prefect 
+- Power BI (DAX, M, Power Query)
+- Python 
+- Git
+
+---
+
 ## Business Problem
 E-commerce businesses generate large volumes of raw transactional data, but often lack:
 
@@ -54,18 +67,6 @@ An end-to-end ELT pipeline was built to:
 
 ---
 
-## Tech Stack 
-- Azure Data Lake 
-- Azure Data Factory
-- Snowflake 
-- dbt 
-- SQL
-- Prefect 
-- Power BI (DAX, M, Power Query)
-- Python 
-- Git
-
----
 
 ## Pipeline Flow
 1. Raw data stored in Azure Data Lake  
@@ -154,5 +155,4 @@ Reduces manual reporting effort and enables faster decision-making.
 - GitHub Repo  
 - Portfolio Website  
 - LinkedIn  
-
 
