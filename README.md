@@ -20,7 +20,7 @@ Key components include:
 
 ## Architecture
 
-### Pipeline
+### ELT Pipeline (Extract, Transform, Load)
 ![Architecture](images/architecture.png)
 Azure Data Lake → Snowflake → dbt → Semantic Layer → Power BI  
 Orchestration: Prefect
