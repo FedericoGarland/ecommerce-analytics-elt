@@ -9,12 +9,21 @@ The pipeline is fully automated and orchestrated with Prefect (Python), running 
 
 Key components include:
 - Data ingestion and loading into Snowflake (data warehouse) from Azure Data Lake
-- Transformation using dbt (staging + marts) with incremental logic 
+- Transformation using dbt (raw -> staging -> marts), including incremental logic 
 - Automated testing for data quality and referential integrity (dbt tests)
 - Semantic layer design (star schema, dimensional modeling)
 - Power BI dashboard for end user analytics and decision making
-- Orchestration (Prefect)
+- Orchestration with Prefect
 - End-to-end version control using Git
+
+---
+
+## Architecture
+
+![Architecture](images/architecture.png)
+
+Azure Data Lake (Landing) -> Snowflake (Data Warehouse) -> dbt transformation (Raw -> Staging -> Marts) -> Semantic Layer -> Power BI Dashboard
+Orchestration: Prefect
 
 ---
 
@@ -42,14 +51,6 @@ An end-to-end ELT pipeline was built to:
 - Orchestrate daily runs using Prefect (Python)
 - Deliver insights through a Power BI executive dashboard
 
----
-
-## Architecture
-
-![Architecture](images/architecture.png)
-
-Azure Data Lake (Landing) -> Snowflake (Data Warehouse) -> dbt transformation (Raw -> Staging -> Marts) -> Semantic Layer -> Power BI Dashboard
-Orchestration: Prefect
 
 ---
 
@@ -58,6 +59,7 @@ Orchestration: Prefect
 - Azure Data Factory
 - Snowflake 
 - dbt 
+- SQL
 - Prefect 
 - Power BI (DAX, M, Power Query)
 - Python 
