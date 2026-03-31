@@ -1,11 +1,6 @@
 ﻿## End-to-End Analytics Engineering Pipeline and Data Warehouse for E-Commerce (Snowflake, dbt, Prefect, Azure Data Lake)
 
 ## Overview
-End-to-end production pipeline and cloud data warehouse for e-commerce analytics
-This project consisted in the design, development and deployment of a cloud data warehouse, semantic model and ELT pipeline for e-commerce sales analytics. An end-to-end analytics engineering ELT pipeline was built to extract raw data from Azure Data Lake to a Snowflake data warehouse, transform and model the raw data into a star-schema semantic layer (marts) using dbt and incremental logic, run automated tests to ensure data quality, generate documentation, and feed a Power BI executive sales dashboard for real-world decision making. The pipeline is fully automated and orchestrated with Prefect (Python) to run daily at a scheduled time, allowing the business constant access to relevant and updated information. The project was version controlled from start to end using Git. 
-
-
-## Overview
 
 Production-ready end-to-end analytics engineering pipeline and cloud data warehouse for e-commerce analytics.
 
